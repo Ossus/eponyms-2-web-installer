@@ -1,0 +1,6 @@
+[submodule "roles/couchbase-server"]
+	path = roles/couchbase-server
+	url = https://github.com/couchbaselabs/ansible-couchbase-server.git
+[submodule "roles/couchbase-sync-gateway"]
+	path = roles/couchbase-sync-gateway
+	url = https://github.com/p2/ansible-couchbase-sync-gateway.git
