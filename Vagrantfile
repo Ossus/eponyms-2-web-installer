@@ -20,7 +20,10 @@ Vagrant.configure("2") do |config|
   # play Ansible
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "playbook.yml"
-    ansible.tags = "configuration"
+    #ansible.tags = "configuration"
+    ansible.extra_vars = {
+      vagrant_host: IP_ADDRESS
+    }
   end
   
   if ARGV[0] == "up" && !ARGV[1]
