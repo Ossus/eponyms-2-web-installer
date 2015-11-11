@@ -8,11 +8,17 @@ It installs:
 - Couchbase Sync Gateway (port `4999`) [🔹][sync-gateway]
 - _NOT YET:_ Eponyms 2 Python web app
 
-By default, the provisioned machine is available on [192.168.88.22](http://192.168.88.22) from the host machine.
-Couchbase server wil be running on default port [`8091`](http://192.168.88.22:8091).
-The Sync gateway will be running on default port `4984`, externally available via Nginx on port [`4999`](http://192.168.88.22:4999).
+By default, the provisioned machine is available on [192.168.10.22](http://192.168.10.22) from the host machine.
+Couchbase server wil be running on default port [`8091`](http://192.168.10.22:8091).
+The Sync gateway will be running on default port `4984`, externally available via Nginx on port [`4999`](http://192.168.10.22:4999).
 
 ### -> STILL NEEDS to setup supervisor to run the sync gateway
+
+
+Configuration
+-------------
+
+Most important configuration variables, like admin username+password, live in `couchbase-server.yml`.
 
 
 Installation
@@ -27,7 +33,7 @@ Installation
 
         $ vagrant up
 
-4. You can now configure Couchbase by going through the setup wizard on [192.168.88.22:8091](http://192.168.88.22:8091)
+4. You can now configure Couchbase by going through the setup wizard on [192.168.10.22:8091](http://192.168.10.22:8091)
 
 
 ### Vagrant Basics

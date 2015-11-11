@@ -1,7 +1,7 @@
 # Setup a box with Couchbase Server, Couchbase Sync Gateway and Flask
 
 if (defined?(ip)).nil?
-  IP_ADDRESS = "192.168.88.22"
+  IP_ADDRESS = "192.168.10.22"
 end
 
 Vagrant.configure("2") do |config|
