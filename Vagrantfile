@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, :ip => IP_ADDRESS
   config.vm.provider "virtualbox" do |v|
     v.name = "eponyms"
-    v.memory = 1024
+    v.memory = 1536
   end
 
   # use cachier plugin if available

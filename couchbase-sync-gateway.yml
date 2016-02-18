@@ -1,5 +1,5 @@
 ---
 
-couchbase_sync_gateway_package: couchbase-sync-gateway-community_1.0.3_x86_64.deb
-couchbase_sync_gateway_url: http://packages.couchbase.com/releases/couchbase-sync-gateway/1.0.3/{{ couchbase_sync_gateway_package }}
+couchbase_sync_gateway_version: 1.2.0
+couchbase_sync_gateway_package: couchbase-sync-gateway-community_1.2.0-79_x86_64.deb
 couchbase_sync_gateway_nginx_server: "{{ vagrant_host|default('localhost') }}"

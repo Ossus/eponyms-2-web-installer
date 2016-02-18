@@ -24,22 +24,27 @@ Most important configuration variables, like admin username+password, live in `c
 Installation
 ------------
 
-1. Install [Vagrant][] and [Ansible][]
-2. Install vagrant cachier plugin (doesn't seem to work correctly though):
+1. Install [Vagrant][] (download) and [Ansible][] (as `pip install ansible`)
+2. Install vagrant cachier plugin:
         
         $ vagrant plugin install vagrant-cachier
 
-3. Run:
+3. It's not currently possible to download sync gateway (1.2) without user
+    interaction. Hence, download the _DEB_, as specified in `couchbase-sync-gateway.yml`, to the root directory. It will be copied to the VM.
+4. Run:
 
         $ vagrant up
+    
+    If this fails at later steps (rebalancing or setting up buckets), you may be able to proceed with manual configuration.
 
-4. You can now configure Couchbase by going through the setup wizard on [192.168.10.22:8091](http://192.168.10.22:8091)
+5. You can now configure Couchbase by going through the setup wizard on [192.168.10.22:8091](http://192.168.10.22:8091)
+6. The sync gateway is available on [192.168.10.22:4999](http://192.168.10.22:4999)
 
 
 ### Vagrant Basics
 
-- `vagrant up`: Build and run the VM
-- `vagrant provision`: Update VM
+- `vagrant up`: Build, run and provision the VM
+- `vagrant provision`: Update VM (re-run the ansible playbook)
 - `vagrant ssh`: SSH into the VM
 - `vagrant halt`: Shut down gracefully
 - `vagrant destroy`: Destroy entire VM
@@ -47,5 +52,5 @@ Installation
 
 [sync-gateway]: http://developer.couchbase.com/mobile/develop/guides/sync-gateway/
 [couchbase-server]: http://www.couchbase.com/nosql-databases/couchbase-server
-[vagrant]: http://www.vagrantup.com/downloads
+[vagrant]: https://www.vagrantup.com/downloads.html
 [ansible]: http://docs.ansible.com
