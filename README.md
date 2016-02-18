@@ -45,7 +45,43 @@ Installation
 - `vagrant destroy`: Destroy entire VM
 
 
+Docker
+------
+
+1. Install **Docker** (`brew install docker-compose`) and [VirtualBox][].
+2. Create default machine:
+    
+    $ docker-machine create --driver virtualbox default
+
+3. Start the default machine and setup the environment:
+    
+    $ docker-machine start default
+    $ eval "$(docker-machine env default)"
+
+4. Make Docker install Couchbase server and Sync Gateway using settings in `docker-compose.yml`:
+    
+    $ docker-compose up -d
+
+5. Install Sync Gateway, using configuration `couchbase-sync-gateway.json`:
+    
+    $ docker run -p 4984:4984 -p 4985:4985 couchbase/sync-gateway couchbase-sync-gateway.json
+
+0. Access N1QL interface:
+    
+    $ docker run -it couchbase /opt/couchbase/bin/cbq \
+      -engine=http://$(docker-machine ip default):8093
+
+
+### Docker Basics
+
+- `docker-machine create --driver virtualbox default`: Create machine _default_ using VirtualBox.
+- `docker-machine start default`: Start the machine called _default_.
+- `docker-machine env`: see docker machine environment.
+- `eval "$(docker-machine env default)"`: Configure current shell with the docker machine.
+
+
 [sync-gateway]: http://developer.couchbase.com/mobile/develop/guides/sync-gateway/
 [couchbase-server]: http://www.couchbase.com/nosql-databases/couchbase-server
 [vagrant]: http://www.vagrantup.com/downloads
 [ansible]: http://docs.ansible.com
+[VirtualBox]: https://www.virtualbox.org/wiki/Downloads
