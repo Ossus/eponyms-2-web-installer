@@ -4,21 +4,25 @@ Eponyms 2 Server Installation
 Provisions a box that can run the complete Eponyms 2 stack.
 It installs:
 
-- Couchbase Server (port `8091`) [🔹][couchbase-server]
-- Couchbase Sync Gateway (port `4999`) [🔹][sync-gateway]
+- Couchbase Server [🔹][couchbase-server]
+    + ports `8091` and `8092`
+- Couchbase Sync Gateway [🔹][sync-gateway]
+    + port `4984` open on localhost
+    + admin port `4985` open on localhost
+- nginx [🔹][nginx]
+    + port [`4999`](http://192.168.10.22:4999) open to world, forwarded to `4984`
 - _NOT YET:_ Eponyms 2 Python web app
 
 By default, the provisioned machine is available on [192.168.10.22](http://192.168.10.22) from the host machine.
-Couchbase server wil be running on default port [`8091`](http://192.168.10.22:8091).
-The Sync gateway will be running on default port `4984`, externally available via Nginx on port [`4999`](http://192.168.10.22:4999).
 
-### -> STILL NEEDS to setup supervisor to run the sync gateway
+The auto-bucket-creation is currently disabled since it's not quite clear to me why I can initialize a cluster with Ansible, but then am still prompted to create a bucket when accessing the web interface the first time.
 
 
 Configuration
 -------------
 
 Most important configuration variables, like admin username+password, live in `couchbase-server.yml`.
+The defaults provision a machine with 2GB of RAM, 1GB dedicated to the bucket.
 
 
 Installation
@@ -50,7 +54,14 @@ Installation
 - `vagrant destroy`: Destroy entire VM
 
 
+Helpful Articles
+----------------
+
+- [Couchbase Server and Sync Gateway Explained](http://ti.eng.br/configuring-your-very-first-couchbase-mobile-sync-backend/)
+
+
 [sync-gateway]: http://developer.couchbase.com/mobile/develop/guides/sync-gateway/
 [couchbase-server]: http://www.couchbase.com/nosql-databases/couchbase-server
+[nginx]: http://nginx.org
 [vagrant]: https://www.vagrantup.com/downloads.html
 [ansible]: http://docs.ansible.com

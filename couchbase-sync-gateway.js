@@ -41,6 +41,6 @@ function (doc, oldDoc) {
 	
 	// unknown document type
 	else {
-		throw({forbidden: "Document type " + doc.type + " not permitted"});
+		throw({forbidden: "Document type '" + doc.type + "' not permitted"});
 	}
 }
