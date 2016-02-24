@@ -1,0 +1,39 @@
+---
+- include: RedHat.yml
+  when: ansible_os_family == "RedHat"
+
+- include: Debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Create Web App User
+  user: name={{ eponyms2w_app_user }} comment="Eponyms 2 Web App" group=admin state=present home=/home/{{ eponyms2w_app_user }}
+
+- name: Install App
+  git: repo=https://github.com/ossus/eponyms-2-web.git
+       dest=/home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ eponyms2w_app_user }}"
+
+- name: Install Python Packages
+  pip: virtualenv="/home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }}/env" 
+       virtualenv_python=python3
+       requirements="/home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }}/requirements.txt"
+
+- name: Setup Upstart
+  template: src=upstart.conf.j2 dest=/etc/init/{{ eponyms2w_app_name }}.conf
+
+- name: Start App Service
+  service: name={{ eponyms2w_app_name }} state=started
+
+- name: Copy Nginx Settings
+  template: src=eponyms-2-web.nginx.j2 dest=/etc/nginx/sites-available/eponyms-2-web
+
+- name: Disable Nginx Default
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: Apply Nginx Settings
+  file: src=/etc/nginx/sites-available/eponyms-2-web dest=/etc/nginx/sites-enabled/eponyms-2-web state=link
+
+- name: Restart Nginx
+  service: name=nginx state=restarted

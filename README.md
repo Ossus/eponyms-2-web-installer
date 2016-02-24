@@ -9,9 +9,11 @@ It installs:
 - Couchbase Sync Gateway [🔹][sync-gateway]
     + port `4984` open on localhost
     + admin port `4985` open on localhost
+- Eponyms 2 Python web app [🔹][web-app]
+    + port `8000` (via gunicorn) open on localhost
 - nginx [🔹][nginx]
     + port [`4999`](http://192.168.10.22:4999) open to world, forwarded to `4984`
-- _NOT YET:_ Eponyms 2 Python web app
+    + port [`80`](http://192.168.10.22) open to world, forwarded to `8000`
 
 By default, the provisioned machine is available on [192.168.10.22](http://192.168.10.22) from the host machine.
 
@@ -33,16 +35,15 @@ Installation
         
         $ vagrant plugin install vagrant-cachier
 
-3. It's not currently possible to download sync gateway (1.2) without user
-    interaction. Hence, download the _DEB_, as specified in `couchbase-sync-gateway.yml`, to the root directory. It will be copied to the VM.
-4. Run:
+3. Run:
 
         $ vagrant up
     
     If this fails at later steps (rebalancing or setting up buckets), you may be able to proceed with manual configuration.
 
-5. You can now configure Couchbase by going through the setup wizard on [192.168.10.22:8091](http://192.168.10.22:8091)
-6. The sync gateway is available on [192.168.10.22:4999](http://192.168.10.22:4999)
+4. You can now configure Couchbase by going through the setup wizard on [192.168.10.22:8091](http://192.168.10.22:8091)
+5. The sync gateway is available on [192.168.10.22:4999](http://192.168.10.22:4999)
+6. The [web app][web-app] is available on [192.168.10.22](http://192.168.10.22)
 
 
 ### Vagrant Basics
@@ -58,10 +59,12 @@ Helpful Articles
 ----------------
 
 - [Couchbase Server and Sync Gateway Explained](http://ti.eng.br/configuring-your-very-first-couchbase-mobile-sync-backend/)
+- [Flask, gunicorn and nginx on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04)
 
 
 [sync-gateway]: http://developer.couchbase.com/mobile/develop/guides/sync-gateway/
 [couchbase-server]: http://www.couchbase.com/nosql-databases/couchbase-server
+[web-app]: https://github.com/Ossus/eponyms-2-web
 [nginx]: http://nginx.org
 [vagrant]: https://www.vagrantup.com/downloads.html
 [ansible]: http://docs.ansible.com

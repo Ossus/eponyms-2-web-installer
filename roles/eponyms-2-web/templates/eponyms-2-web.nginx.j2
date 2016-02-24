@@ -1,0 +1,16 @@
+upstream gunicorn_app {
+    server unix:/home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }}/{{ eponyms2w_app_name }}.sock fail_timeout=0;
+}
+
+# HTTP server
+#
+server {
+    listen {{ eponyms2w_wan_port }};
+    server_name {{ eponyms2w_nginx_server }};
+    root /home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }};
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }}/{{ eponyms2w_app_name }}.sock;
+    }
+}

@@ -1,0 +1,12 @@
+description "Gunicorn Flask application server serving Eponyms 2 web app"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+setuid {{ eponyms2w_app_user }}
+setgid www-data
+
+env PATH=/home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }}/env/bin
+chdir /home/{{ eponyms2w_app_user }}/{{ eponyms2w_app_name }}
+exec gunicorn --workers 2 --bind unix:{{ eponyms2w_app_name }}.sock -m 007 wsgi

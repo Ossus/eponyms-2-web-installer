@@ -1,0 +1,5 @@
+---
+eponyms2w_app_name: eponyms-2-web
+eponyms2w_app_user: eponymsweb
+eponyms2w_wan_port: 80
+eponyms2w_nginx_server: eponyms.ch

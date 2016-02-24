@@ -11,6 +11,7 @@
   roles:
     - couchbase-server
     - couchbase-sync-gateway
+    - eponyms-2-web
   tasks:
 
 # from: roles/couchbase-server/examples/cluster_init.yml
