@@ -19,6 +19,9 @@ By default, the provisioned machine is available on [192.168.10.22](http://192.1
 
 The auto-bucket-creation is currently disabled since it's not quite clear to me why I can initialize a cluster with Ansible, but then am still prompted to create a bucket when accessing the web interface the first time.
 
+Also, you must restart _sync_gateway_ after booting the machine since it seems to fail to wait for couchbase to be running.
+SSH into your VM and issue: `sudo start sync_gateway`
+
 
 Configuration
 -------------
